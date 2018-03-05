@@ -1,4 +1,3 @@
-<%= link_to 'Posts', post_index_path %>
 <p>
 	<strong>Titulo:</strong>
 	<%= @post.title %>
@@ -7,3 +6,24 @@
 	<strong>Cuerpo:</strong>
 	<%= @post.body %>
 </p>
+<h2>Comentarios</h2>
+<% @post.comments.each do |comment| %>
+	<p>
+		<strong>Comentario:</strong>
+		<%= comment.comment %>
+	</p>
+<% end %>
+
+<h2>Nuevo comentario</h2>
+<%= form_with(model: [ @post, @post.comments.build ], local: true) do |form| %>
+	<p>
+		<%= form.label :Comentario %>
+		<%= form.text_area :comment %>
+	</p>
+	<p>
+		<%= form.submit %>
+	</p>
+<% end %>
+
+<%= link_to 'Editar', edit_post_path(@post) %> |
+<%= link_to 'Posts', post_index_path %>
