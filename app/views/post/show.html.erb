@@ -1,29 +1,37 @@
-<p>
-	<strong>Titulo:</strong>
-	<%= @post.title %>
-</p>
-<p>
-	<strong>Cuerpo:</strong>
-	<%= @post.body %>
-</p>
-<h2>Comentarios</h2>
-<% @post.comments.each do |comment| %>
-	<p>
-		<strong>Comentario:</strong>
-		<%= comment.comment %>
-	</p>
-<% end %>
+<div class="container">
+  <div class="col-10 offset-1">
 
-<h2>Nuevo comentario</h2>
-<%= form_with(model: [ @post, @post.comments.build ], local: true) do |form| %>
-	<p>
-		<%= form.label :Comentario %>
-		<%= form.text_area :comment %>
-	</p>
-	<p>
-		<%= form.submit %>
-	</p>
-<% end %>
+    <%= link_to 'Volver', post_index_path, class: "row mt-5" %>
 
-<%= link_to 'Editar', edit_post_path(@post) %> |
-<%= link_to 'Posts', post_index_path %>
+    <!-- Post -->
+    <div class="row mt-5">
+      <div class="col-12">
+        <h1><%= @post.title %></h1>
+      </div>
+    </div>
+    <div class="row">
+      <p class="col-12 mt-3"><%= @post.body %></p>
+    </div>
+
+    <% @post.comments.each do |comment| %>
+      <div class="card mt-4">
+        <div class="card-header">
+          <span>user1@example.com comento hace alrrededor de 1 hora</span>
+        </div>
+        <div class="card-body">
+          <%= comment.comment %>
+        </div>
+      </div>
+    <% end %>
+
+
+    <%= form_with(model: [ @post, @post.comments.build ], local: true, class: "mt-4") do |form| %>
+      <div class="form-group">
+        <%= form.label "Nuevo_comentario" %>
+        <%= form.text_area :comment, class: "form-control", rows: "3" %>
+        <%= form.submit "Comentar", class: "btn btn-primary mt-3" %>
+      </div>
+    <% end %>
+
+  </div>
+</div>
