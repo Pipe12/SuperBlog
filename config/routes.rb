@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :post do
+  resources :posts do
   	resources :comments
   end
 end
